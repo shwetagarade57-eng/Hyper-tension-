@@ -1,1 +1,196 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Pulse | Hypertension Analysis</title>
+    <!-- Tailwind CSS for high-end medical design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .medical-gradient { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); }
+        .form-card { border-top: 5px solid #0284c7; }
+        .btn-medical { background-color: #0284c7; transition: all 0.3s ease; }
+        .btn-medical:hover { background-color: #0369a1; transform: translateY(-1px); }
+        .result-success { border-left: 8px solid #22c55e; }
+        .result-warning { border-left: 8px solid #eab308; }
+        .result-orange { border-left: 8px solid #f97316; }
+        .result-danger { border-left: 8px solid #dc2626; }
+    </style>
+</head>
+<body class="medical-gradient min-h-screen font-sans text-gray-800">
+
+    <!-- Navbar/Header -->
+    <header class="bg-white shadow-sm p-4 mb-8">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-heart-pulse text-sky-600 text-3xl"></i>
+                <h1 class="text-2xl font-bold tracking-tight text-sky-900">Predictive<span class="text-sky-600">Pulse</span></h1>
+            </div>
+            <div class="hidden md:block text-sm font-medium text-sky-700 bg-sky-50 px-4 py-2 rounded-full border border-sky-100">
+                <i class="fa-solid fa-shield-halved mr-2"></i>HIPAA Compliant Data Entry
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 pb-20">
+        
+        <!-- Welcome Title -->
+        <div class="text-center mb-10">
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">Hypertension Diagnostic Tool</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Analyze clinical parameters to determine hypertension stages and receive immediate medical recommendations.</p>
+        </div>
+
+        <div class="space-y-10">
+            <!-- Main Input Form -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 form-card">
+                <form action="/predict" method="post" class="space-y-8">
+
+<div class="grid md:grid-cols-2 gap-8">
+
+<!-- LEFT COLUMN -->
+<div class="space-y-6">
+
+<div>
+<label class="block text-sm font-bold text-gray-700 uppercase mb-2">Age</label>
+<input type="number" name="Age" required class="w-full px-4 py-3 border border-gray-200 rounded-xl">
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 uppercase mb-2">History of Hypertension</label>
+<select name="History" class="w-full px-4 py-3 border border-gray-200 rounded-xl">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 uppercase mb-2">Patient Type</label>
+<select name="Patient" class="w-full px-4 py-3 border border-gray-200 rounded-xl">
+<option value="0">Outpatient</option>
+<option value="1">Inpatient</option>
+</select>
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 uppercase mb-2">Taking Medication</label>
+<select name="TakeMedication" class="w-full px-4 py-3 border border-gray-200 rounded-xl">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 uppercase mb-2">Severity</label>
+<select name="Severity" class="w-full px-4 py-3 border border-gray-200 rounded-xl">
+<option value="1">Low</option>
+<option value="2">Medium</option>
+<option value="3">High</option>
+</select>
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 uppercase mb-2">Breath Shortness</label>
+<select name="BreathShortness" class="w-full px-4 py-3 border border-gray-200 rounded-xl">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+</div>
+
+</div>
+
+<!-- RIGHT COLUMN -->
+<div class="space-y-6">
+
+<div>
+<label class="block text-sm font-bold text-gray-700 uppercase mb-2">Visual Changes</label>
+<select name="VisualChanges" class="w-full px-4 py-3 border border-gray-200 rounded-xl">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 uppercase mb-2">Nose Bleeding</label>
+<select name="NoseBleeding" class="w-full px-4 py-3 border border-gray-200 rounded-xl">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 uppercase mb-2">Years Since Diagnosed</label>
+<input type="number" name="Whendiagnoused" required class="w-full px-4 py-3 border border-gray-200 rounded-xl">
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 uppercase mb-2">Systolic BP</label>
+<input type="number" name="Systolic" required class="w-full px-4 py-3 border border-gray-200 rounded-xl">
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 uppercase mb-2">Diastolic BP</label>
+<input type="number" name="Diastolic" required class="w-full px-4 py-3 border border-gray-200 rounded-xl">
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 uppercase mb-2">Controlled Diet</label>
+<select name="ControlledDiet" class="w-full px-4 py-3 border border-gray-200 rounded-xl">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+</div>
+
+</div>
+
+</div>
+
+<button type="submit" class="w-full btn-medical text-white font-black text-lg py-4 rounded-xl flex items-center justify-center gap-3 shadow-lg">
+<i class="fa-solid fa-wave-square"></i> GENERATE RISK PROFILE
+</button>
+
+</form>
+            </div>
+
+            <!-- Result Section (Only visible after form submission) -->
+            {% if show_result %}
+            <div id="result" class="bg-white rounded-2xl shadow-2xl overflow-hidden 
+                {% if color == 'success' %} result-success {% elif color == 'warning' %} result-warning {% elif color == 'orange' %} result-orange {% else %} result-danger {% endif %}">
+                <div class="p-8 md:p-10">
+                    <div class="flex items-center gap-6 mb-6">
+                        <div class="p-5 rounded-2xl 
+                            {% if color == 'success' %} bg-green-100 text-green-600 {% elif color == 'warning' %} bg-yellow-100 text-yellow-600 {% elif color == 'orange' %} bg-orange-100 text-orange-600 {% else %} bg-red-100 text-red-600 {% endif %}">
+                            <i class="fa-solid fa-stethoscope text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest">Prediction Results</h3>
+                            <p class="text-3xl font-black 
+                                {% if color == 'success' %} text-green-600 {% elif color == 'warning' %} text-yellow-600 {% elif color == 'orange' %} text-orange-600 {% else %} text-red-600 {% endif %}">
+                                {{ prediction_text }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                        <h4 class="font-black text-slate-800 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-user-md text-sky-600"></i> CLINICAL ADVICE
+                        </h4>
+                        <p class="text-slate-600 leading-relaxed text-lg">{{ advice }}</p>
+                    </div>
+                    <div class="mt-6 flex items-center justify-between text-xs text-gray-400">
+                        <p><i class="fa-solid fa-circle-info mr-1"></i> Confidence: High</p>
+                        <p class="italic">Clinical DSS v1.4</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <footer class="text-center text-gray-400 text-sm py-8 border-t border-gray-200 mt-10">
+        <p>&copy; 2026 Predictive Pulse Analysis Team. All rights reserved.</p>
+        <p class="mt-2 text-[10px] uppercase tracking-tighter">Educational Project - Not for medical diagnostic use.</p>
+    </footer>
+
+</body>
+</html>
